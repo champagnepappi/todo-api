@@ -13,7 +13,7 @@ tasks= [
      'done': False},
 ]
 
-@app.route('/todo/api/v1.0/<int:task_id>', methods=['GET'])
+@app.route('/todo/api/v1.0/tasks/<int:task_id>', methods=['GET'])
 def get_tasks(task_id):
     task = [task for task in tasks if task['id'] == task_id]
     if len(task) == 0:
