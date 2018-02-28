@@ -2,9 +2,16 @@ from flask import Flask
 
 app = Flask(__name__)
 
-@app.route('/')
-def index():
-    return "Hello, world"
+tasks= [
+    {'id': 1,
+     'title': 'Buy groceries',
+     'description': 'Milk, Cheese,Pizza,Fruit, Tylenol',
+     'done': False},
+    {'id': 2,
+     'title': 'Learn Python',
+     'description': 'Get a good tutorial',
+     'done': False},
+]
 
 if __name__ == '__main__':
     app.run(debug=True)
