@@ -6,7 +6,7 @@ from flask import Flask, jsonify
 from flask_httpauth import HTTPBasicAuth
 
 app = Flask(__name__)
-auth = HTTPAuth()
+auth = HTTPBasicAuth()
 
 tasks= [
     {'id': 1,
@@ -76,6 +76,12 @@ def make_public_task(task):
         else:
             new_task[field] = task[field]
     return new_task
+
+@auth.get_password
+def get_password(username):
+    if username == 'miguel':
+        return 'python'
+    return None
 
 if __name__ == '__main__':
     app.run(debug=True)
