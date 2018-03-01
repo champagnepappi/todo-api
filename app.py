@@ -22,5 +22,9 @@ def get_tasks(task_id):
         abort(404)
     return jsonify({'tasks': task[0]})
 
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
 if __name__ == '__main__':
     app.run(debug=True)
