@@ -6,6 +6,7 @@ from flask import Flask, jsonify
 from flask_httpauth import HTTPBasicAuth
 
 app = Flask(__name__)
+auth = HTTPAuth()
 
 tasks= [
     {'id': 1,
