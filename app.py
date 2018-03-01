@@ -32,10 +32,10 @@ def create_task():
 
 @app.route('/todo/api/v1.0/tasks/<int:task_id>', methods=['GET'])
 def get_tasks(task_id):
-    task = [task for task in tasks if task['id'] == task_id]
-    if len(task) == 0:
-        abort(404)
-    return jsonify({'tasks': task[0]})
+    # task = [task for task in tasks if task['id'] == task_id]
+    # if len(task) == 0:
+    #     abort(404)
+    return jsonify({'tasks': [make_public_task(task) for tasks]})
 
 @app.route('/todo/api/v1.0/tasks/<int:task_id>', methods=['PUT'])
 def update_task(task_id):
