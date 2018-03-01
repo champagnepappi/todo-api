@@ -33,11 +33,12 @@ def create_task():
     return jsonify({'task': task}), 201
 
 @app.route('/todo/api/v1.0/tasks/<int:task_id>', methods=['GET'])
+@auth.login_required
 def get_tasks(task_id):
     # task = [task for task in tasks if task['id'] == task_id]
     # if len(task) == 0:
     #     abort(404)
-    return jsonify({'tasks': [make_public_task(task) for task in tasks]})
+    return jsonify({'tasks': tasks})
 
 @app.route('/todo/api/v1.0/tasks/<int:task_id>', methods=['PUT'])
 def update_task(task_id):
@@ -64,6 +65,12 @@ def delete_task(task_id):
     tasks.remove(task[0])
     return jsonify({'result': True})
 
+@auth.get_password
+def get_password(username):
+    if username == 'miguel':
+        return 'python'
+    return None
+
 @app.errorhandler(404)
 def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
@@ -77,11 +84,6 @@ def make_public_task(task):
             new_task[field] = task[field]
     return new_task
 
-@auth.get_password
-def get_password(username):
-    if username == 'miguel':
-        return 'python'
-    return None
 
 if __name__ == '__main__':
     app.run(debug=True)
